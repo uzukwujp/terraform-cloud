@@ -20,3 +20,16 @@ tags = {
   Managed-By      = "Terraform"
   Billing-Account = "554311352445"
 }
+
+environment = "production"
+
+ami = "ami-0b0af3577fe5e3532"
+
+keypair = "devops"
+
+# Ensure to change this to your acccount number
+account_no = "554311352445"
+
+db-username = "david"
+
+db-password = "devopspbl"

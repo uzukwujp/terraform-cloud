@@ -41,22 +41,3 @@ variable "name" {
   default = "JAY"
 }
 
-variable "Environment" {
-    type = string
-    default = "production"
-}
-
-variable "Owner_Email" {
-    type = string
-    default = "jaypee@darey.io"
-}
-
-variable "Managed_By" {
-    type = string
-    default = "Terraform"
-}
-
-variable "Billing_Account" {
-    type = string
-    default = "554311352445"
-}

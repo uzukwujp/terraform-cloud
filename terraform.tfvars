@@ -15,8 +15,8 @@ preferred_number_of_public_subnets = 2
 preferred_number_of_private_subnets = 4
 
 tags = {
-  Environment      = var.Environment
-  Owner-Email     = var.Owner_Email
-  Managed-By      = var.Managed_By
-  Billing-Account = var.Billing_Account
+  Environment      = "production"
+  Owner-Email     = "jaypee@darey.io"
+  Managed-By      = "Terraform"
+  Billing-Account = "554311352445"
 }

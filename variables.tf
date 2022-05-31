@@ -1,27 +1,62 @@
 variable "region" {
-      default = "eu-central-1"
+  default = "us-east-1"
 }
 
 variable "vpc_cidr" {
-    default = "172.16.0.0/16"
+  default = "172.16.0.0/16"
 }
 
 variable "enable_dns_support" {
-    default = "true"
+  default = "true"
 }
 
 variable "enable_dns_hostnames" {
-    default ="true" 
+  default = "true"
 }
 
 variable "enable_classiclink" {
-    default = "false"
+  default = "false"
 }
 
 variable "enable_classiclink_dns_support" {
-    default = "false"
+  default = "false"
 }
 
-  variable "preferred_number_of_public_subnets" {
-      default = null
+variable "preferred_number_of_public_subnets" {
+  default = null
+}
+
+variable "preferred_number_of_private_subnets" {
+  default = null
+}
+
+variable "tags" {
+  description = "A mapping of tags to assign to all resources."
+  type        = map(string)
+  default     = {}
+}
+
+variable "name" {
+  type    = string
+  default = "JAY"
+}
+
+variable "Environment" {
+    type = string
+    default = "production"
+}
+
+variable "Owner_Email" {
+    type = string
+    default = "jaypee@darey.io"
+}
+
+variable "Managed_By" {
+    type = string
+    default = "Terraform"
+}
+
+variable "Billing_Account" {
+    type = string
+    default = "554311352445"
 }

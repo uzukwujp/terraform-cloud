@@ -66,3 +66,7 @@ variable "master-password" {
   description = "RDS master password"
 }
 
+variable "environment" {
+  type = string
+  default = "production"
+}

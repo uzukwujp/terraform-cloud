@@ -30,6 +30,6 @@ keypair = "devops"
 # Ensure to change this to your acccount number
 account_no = "554311352445"
 
-db-username = "david"
+master-username = "david"
 
-db-password = "devopspbl"
+master-password = "devopspbl"

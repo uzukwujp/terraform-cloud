@@ -25,7 +25,7 @@ environment = "production"
 
 ami = "ami-0b0af3577fe5e3532"
 
-keypair = "devops"
+keypair = "terraform"
 
 # Ensure to change this to your acccount number
 account_no = "554311352445"

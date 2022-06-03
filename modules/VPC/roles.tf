@@ -18,6 +18,7 @@ name = "ec2_instance_role"
     var.tags,
     {
       Name = "aws assume role"
+      Environment = var.environment
     },
   )
 }
@@ -44,6 +45,7 @@ resource "aws_iam_policy" "policy" {
     var.tags,
     {
       Name =  "aws assume policy"
+      Environment = var.environment
     },
   )
 

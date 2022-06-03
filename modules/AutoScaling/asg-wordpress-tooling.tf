@@ -1,12 +1,12 @@
 # launch template for wordpress
 
 resource "aws_launch_template" "wordpress-launch-template" {
-  image_id               = var.ami
+  image_id               = var.ami-web
   instance_type          = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.webserver-sg.id]
+  vpc_security_group_ids = var.web-sg
 
   iam_instance_profile {
-    name = aws_iam_instance_profile.ip.id
+    name = var.instance_profile
   }
 
   key_name = var.keypair
@@ -38,16 +38,13 @@ resource "aws_launch_template" "wordpress-launch-template" {
 
 resource "aws_autoscaling_group" "wordpress-asg" {
   name                      = "wordpress-asg"
-  max_size                  = 2
-  min_size                  = 1
+  max_size                  = var.max_size
+  min_size                  = var.min_size
   health_check_grace_period = 300
   health_check_type         = "ELB"
-  desired_capacity          = 1
-  vpc_zone_identifier = [
+  desired_capacity          = var.desired_capacity
+  vpc_zone_identifier = var.private_subnets
 
-    aws_subnet.private[0].id,
-    aws_subnet.private[1].id
-  ]
 
   launch_template {
     id      = aws_launch_template.wordpress-launch-template.id
@@ -55,7 +52,7 @@ resource "aws_autoscaling_group" "wordpress-asg" {
   }
   tag {
     key                 = "Name"
-    value               = "wordpress-asg"
+    value               = "JAY-wordpress"
     propagate_at_launch = true
   }
 }
@@ -63,17 +60,17 @@ resource "aws_autoscaling_group" "wordpress-asg" {
 # attaching autoscaling group of  wordpress application to internal loadbalancer
 resource "aws_autoscaling_attachment" "asg_attachment_wordpress" {
   autoscaling_group_name = aws_autoscaling_group.wordpress-asg.id
-  alb_target_group_arn   = aws_lb_target_group.wordpress-tgt.arn
+  lb_target_group_arn   = var.wordpress-alb-tgt
 }
 
 # launch template for toooling
 resource "aws_launch_template" "tooling-launch-template" {
-  image_id               = var.ami
+  image_id               = var.ami-web
   instance_type          = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.webserver-sg.id]
+  vpc_security_group_ids = var.web-sg
 
   iam_instance_profile {
-    name = aws_iam_instance_profile.ip.id
+    name = var.instance_profile
   }
 
   key_name = var.keypair
@@ -105,17 +102,13 @@ resource "aws_launch_template" "tooling-launch-template" {
 
 resource "aws_autoscaling_group" "tooling-asg" {
   name                      = "tooling-asg"
-  max_size                  = 2
-  min_size                  = 1
+  max_size                  = var.max_size
+  min_size                  = var.min_size
   health_check_grace_period = 300
   health_check_type         = "ELB"
-  desired_capacity          = 1
+  desired_capacity          = var.desired_capacity
 
-  vpc_zone_identifier = [
-
-    aws_subnet.private[0].id,
-    aws_subnet.private[1].id
-  ]
+  vpc_zone_identifier = var.private_subnets
 
   launch_template {
     id      = aws_launch_template.tooling-launch-template.id
@@ -124,12 +117,12 @@ resource "aws_autoscaling_group" "tooling-asg" {
 
   tag {
     key                 = "Name"
-    value               = "tooling-launch-template"
+    value               = "JAY-tooling"
     propagate_at_launch = true
   }
 }
 # attaching autoscaling group of  tooling application to internal loadbalancer
 resource "aws_autoscaling_attachment" "asg_attachment_tooling" {
   autoscaling_group_name = aws_autoscaling_group.tooling-asg.id
-  alb_target_group_arn   = aws_lb_target_group.tooling-tgt.arn
+  lb_target_group_arn   = var.tooling-alb-tgt
 }

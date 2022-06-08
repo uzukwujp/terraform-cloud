@@ -15,3 +15,15 @@
     #encrypt        = true
   #}
 #}
+
+
+terraform {
+  backend "remote" {
+    organization = "Jaypee-prod"
+
+    workspaces {
+      name = "terraform-cloud"
+    }
+  }
+}
+© 2022 GitHub, Inc.

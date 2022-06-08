@@ -23,7 +23,13 @@ tags = {
 
 environment = "production"
 
-ami = "ami-0b0af3577fe5e3532"
+ami-web = "ami-00afc20d43826b79c"
+
+ami-nginx = "ami-06921bea82ac53a6a"
+ami-bastion = "ami-037123994e4da4790"
+
+ami-sonar = "ami-03761ebcfe9c1312b"
+
 
 keypair = "terraform"
 
